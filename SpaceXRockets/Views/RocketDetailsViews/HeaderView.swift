@@ -33,6 +33,11 @@ class HeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        backgroundColor = .black
+        translatesAutoresizingMaskIntoConstraints = false
+        layer.cornerRadius = 32
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+
         addSubviews()
         setupConstraints()
     }

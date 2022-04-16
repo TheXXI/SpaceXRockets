@@ -7,18 +7,19 @@
 
 import UIKit
 
-class InformationView: UIView {
+class GeneralInformationView: UIView {
 
     // MARK: - Private properties
 
-    private var lines = [InformationViewLabelsLine]()
+    private var lines = [GeneralLabelsView]()
 
     // MARK: - Initializers
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         for index in 0...2 {
-            let labelsLine = InformationViewLabelsLine()
+            let labelsLine = GeneralLabelsView()
             switch index {
             case 0:
                 labelsLine.setValueName(name: "Первый запуск")

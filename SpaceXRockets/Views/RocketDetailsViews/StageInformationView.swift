@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InformationViewWithHeader: UIView {
+class StageInformationView: UIView {
 
     // MARK: - Private properties
 
@@ -19,16 +19,17 @@ class InformationViewWithHeader: UIView {
         return label
     }()
 
-    private var lines = [InformationViewWithHeaderLabelsLine]()
+    private var lines = [StageLabelsView]()
 
     // MARK: - Initializers
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         addSubview(headerLabel)
         setupHeaderLabelConstraints()
         for index in 0...2 {
-            let labelsLine = InformationViewWithHeaderLabelsLine()
+            let labelsLine = StageLabelsView()
             switch index {
             case 0:
                 labelsLine.setValueName(name: "Количество двигателей")

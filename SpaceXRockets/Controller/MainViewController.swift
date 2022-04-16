@@ -10,6 +10,10 @@ import UIKit
 class MainViewController: UIViewController, LinkViewAndController {
     typealias RootView = MainView
 
+    // MARK: - Private properties
+
+    private var settingsButton: UIButton!
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -19,5 +23,11 @@ class MainViewController: UIViewController, LinkViewAndController {
 
     override func loadView() {
         self.view = MainView()
+    }
+
+    // MARK: - StatusBarStyle
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
 }

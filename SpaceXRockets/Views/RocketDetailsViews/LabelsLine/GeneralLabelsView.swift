@@ -1,5 +1,5 @@
 //
-//  InformationViewWithHeaderLabelsLine.swift
+//  InformationViewLabelsLine.swift
 //  SpaceXRockets
 //
 //  Created by Михаил Курис on 16.04.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InformationViewWithHeaderLabelsLine: UIView {
+class GeneralLabelsView: UIView {
 
     // MARK: - Private properties
 
@@ -21,16 +21,8 @@ class InformationViewWithHeaderLabelsLine: UIView {
 
     private var valueLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        label.font = UIFont.systemFont(ofSize: 20.0)
         label.textColor = UIColor(named: "textWhite")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    private var valueMetricLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20.0)
-        label.textColor = UIColor(named: "metricTextColor")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -56,16 +48,11 @@ class InformationViewWithHeaderLabelsLine: UIView {
         valueLabel.text = value
     }
 
-    func setMetric(metric: String) {
-        valueMetricLabel.text = metric
-    }
-
     // MARK: - Private methods
 
     private func addSubviews() {
         addSubview(valueNameLabel)
         addSubview(valueLabel)
-        addSubview(valueMetricLabel)
     }
 
     private func setupConstraints() {
@@ -73,12 +60,8 @@ class InformationViewWithHeaderLabelsLine: UIView {
             valueNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             valueNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 32),
 
-            valueMetricLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            valueMetricLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -32),
-            valueMetricLabel.widthAnchor.constraint(equalToConstant: 35),
-
             valueLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            valueLabel.trailingAnchor.constraint(equalTo: valueMetricLabel.leadingAnchor, constant: -8)
+            valueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -32)
         ])
     }
 

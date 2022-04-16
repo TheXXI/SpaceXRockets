@@ -11,7 +11,10 @@ class MainView: UIView {
 
     // MARK: - Public properties
 
-    var rocketsCount = 4
+    var width = UIScreen.main.bounds.size.width
+    var height = UIScreen.main.bounds.size.height
+
+    var rocketInformationViewArray: [RocketInformationView] = []
 
     let activity: UIActivityIndicatorView = {
         let activity =  UIActivityIndicatorView()
@@ -34,24 +37,23 @@ class MainView: UIView {
 
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = 4
-        pageControl.backgroundColor = .black
+        pageControl.numberOfPages = 1
+        pageControl.backgroundColor = UIColor.init(rgb: 0x121212)
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         return pageControl
     }()
 
-    var width = UIScreen.main.bounds.size.width
-    var height = UIScreen.main.bounds.size.height
-
     // MARK: - Private properties
 
+    private var rocketsCount = 1
     private let stackView = UIStackView()
-    private var rocketDetailsViews: [RocketDetailsView] = []
 
     // MARK: - Initializers
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
+
+        backgroundColor = .black
 
         addSubview(activity)
         activity.startAnimating()
@@ -66,6 +68,7 @@ class MainView: UIView {
 
     func configure(conut: Int) {
         rocketsCount = conut
+        pageControl.numberOfPages = conut
         activity.stopAnimating()
         addSubview(pageControl)
         addSubview(scrollView)
@@ -79,11 +82,11 @@ class MainView: UIView {
 
     private func createRocketDetailsViews() {
         for _ in 0..<rocketsCount {
-            let detailsView = RocketDetailsView()
-            detailsView.translatesAutoresizingMaskIntoConstraints = false
-            detailsView.widthAnchor.constraint(equalToConstant: width).isActive = true
-            stackView.addArrangedSubview(detailsView)
-            rocketDetailsViews.append(detailsView)
+            let informationView = RocketInformationView()
+            informationView.translatesAutoresizingMaskIntoConstraints = false
+            informationView.widthAnchor.constraint(equalToConstant: width).isActive = true
+            stackView.addArrangedSubview(informationView)
+            rocketInformationViewArray.append(informationView)
         }
     }
 
