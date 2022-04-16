@@ -3,9 +3,14 @@ excluded:
 
 disabled_rules:
 - unused_optional_binding
+- identifier_name
+- force_cast
+- comment_spacing
 
 line_length:
 - 230 #warning
 - 300 #error
+
+
 
 
