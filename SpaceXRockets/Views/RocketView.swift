@@ -11,6 +11,13 @@ class RocketView: UIView {
 
     // MARK: - Public properties
 
+    let rocketImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .white
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
     var headerView: HeaderView!
     var parametersCollectionView: UICollectionView!
 
@@ -34,12 +41,6 @@ class RocketView: UIView {
         return scrollView
     }()
 
-    private let rocketImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = .white
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
     private var generalInformationView: GeneralInformationView!
     private var firstStageInformationView: StageInformationView!
     private var secondStageInformationView: StageInformationView!

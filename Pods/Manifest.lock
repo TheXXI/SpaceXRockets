@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (5.5.0)
+  - Kingfisher (7.1.2)
   - SwiftLint (0.45.0)
 
 DEPENDENCIES:
   - Alamofire
+  - Kingfisher
   - SwiftLint
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Kingfisher
     - SwiftLint
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
 
-PODFILE CHECKSUM: 56cdbbed2e7446a77b004696bf250773a026da32
+PODFILE CHECKSUM: 1871cf45325e7e4a8a56c9b99661f4b219ac8735
 
 COCOAPODS: 1.10.1

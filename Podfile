@@ -8,5 +8,6 @@ target 'SpaceXRockets' do
   # Pods for SpaceXRockets
   pod 'SwiftLint'
   pod 'Alamofire'
+  pod 'Kingfisher'
 
 end

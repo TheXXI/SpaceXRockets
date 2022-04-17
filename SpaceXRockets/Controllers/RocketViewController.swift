@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class RocketViewController: UIViewController, LinkViewAndController {
 typealias RootView = RocketView
@@ -52,6 +53,9 @@ typealias RootView = RocketView
 
 extension RocketViewController {
     func configureView(rocket: Rocket) {
+        let url = URL(string: rocket.flickrImages[0])
+        view().rocketImageView.kf.setImage(with: url!)
+
         configureButtons()
 
         view().setName(name: rocket.name)
