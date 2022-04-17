@@ -35,8 +35,10 @@ class StageInformationView: UIView {
                 labelsLine.setValueName(name: "Количество двигателей")
             case 1:
                 labelsLine.setValueName(name: "Количество топлива")
+                labelsLine.setMetric(metric: "ton")
             case 2:
                 labelsLine.setValueName(name: "Время сгорания")
+                labelsLine.setMetric(metric: "sec")
             default:
                 break
             }
@@ -56,17 +58,10 @@ class StageInformationView: UIView {
         headerLabel.text = headerText
     }
 
-    func setupValues(
-        firstValue: String,
-        secondValue: String, secondMetric: String,
-        thirdValue: String, thirdMetric: String) {
-        lines[0].setValue(value: firstValue)
-
-        lines[1].setValue(value: secondValue)
-        lines[1].setMetric(metric: secondMetric)
-
-        lines[2].setValue(value: thirdValue)
-        lines[2].setMetric(metric: thirdMetric)
+    func setupValues(engines: Int, fuel: Int, burnTime: Int) {
+        lines[0].setValue(value: String(engines))
+        lines[1].setValue(value: String(fuel))
+        lines[2].setValue(value: String(burnTime))
     }
 
     // MARK: - Private methods

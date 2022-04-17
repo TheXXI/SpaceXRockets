@@ -9,6 +9,18 @@ import UIKit
 
 class HeaderView: UIView {
 
+    // MARK: - Public properties
+
+    let settingsButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "gearshape"), for: .normal)
+        button.tintColor = UIColor(named: "textGray")
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     // MARK: - Private properties
 
     private let rocketName: UILabel = {
@@ -17,16 +29,6 @@ class HeaderView: UIView {
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-    }()
-
-    private let settingsButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "gearshape"), for: .normal)
-        button.tintColor = UIColor(named: "textGray")
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
     }()
 
     // MARK: - Initializers

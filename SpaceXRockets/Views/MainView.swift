@@ -11,6 +11,82 @@ class MainView: UIView {
 
     // MARK: - Public properties
 
+    let reloadButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Перезагрузить", for: .normal)
+        button.setTitleColor(.link, for: .normal)
+        return button
+    }()
+
+    let activity: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView()
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        activity.color = .white
+        return activity
+    }()
+
+    // MARK: - Private properties
+
+    private let errorTextLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.text = "Ошибка загрузки."
+        return label
+    }()
+
+    // MARK: - Initializers
+
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+
+        backgroundColor = .black
+
+        addSubview(activity)
+        addSubview(errorTextLabel)
+        addSubview(reloadButton)
+        errorTextLabel.isHidden = true
+        reloadButton.isHidden = true
+
+        setupConstraints()
+        activity.startAnimating()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Public methods
+
+    func showLoadErrorMessage() {
+        errorTextLabel.isHidden = false
+        reloadButton.isHidden = false
+    }
+
+    func hideLoadErrorMessage() {
+        errorTextLabel.isHidden = true
+        reloadButton.isHidden = true
+    }
+
+    // MARK: - Private methods
+
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            activity.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            activity.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+
+            errorTextLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            errorTextLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -15),
+
+            reloadButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            reloadButton.topAnchor.constraint(equalTo: errorTextLabel.bottomAnchor, constant: 5)
+        ])
+    }
+
+    /*
+    // MARK: - Public properties
+
     var width = UIScreen.main.bounds.size.width
     var height = UIScreen.main.bounds.size.height
 
@@ -37,7 +113,7 @@ class MainView: UIView {
 
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = 1
+        pageControl.numberOfPages = 4
         pageControl.backgroundColor = UIColor.init(rgb: 0x121212)
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         return pageControl
@@ -68,7 +144,7 @@ class MainView: UIView {
 
     func configure(conut: Int) {
         rocketsCount = conut
-        pageControl.numberOfPages = conut
+        //pageControl.numberOfPages = conut
         activity.stopAnimating()
         addSubview(pageControl)
         addSubview(scrollView)
@@ -121,4 +197,5 @@ class MainView: UIView {
             stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
         ])
     }
+    */
 }

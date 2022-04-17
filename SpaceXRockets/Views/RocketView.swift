@@ -7,13 +7,30 @@
 
 import UIKit
 
-class RocketInformationView: UIView {
+class RocketView: UIView {
+
+    // MARK: - Public properties
+
+    var headerView: HeaderView!
+    var parametersCollectionView: UICollectionView!
+
+    let lookLaunchesButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 16
+        button.tintColor = UIColor(named: "textWhite")
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22.0)
+        button.backgroundColor = UIColor(named: "cellsColor")
+        button.setTitle("Посмотреть запуски", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     // MARK: - Private properties
 
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.contentInsetAdjustmentBehavior = .never
         return scrollView
     }()
 
@@ -23,23 +40,9 @@ class RocketInformationView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
-    private var headerView: HeaderView!
-    private var parametersCollectionView: UICollectionView!
     private var generalInformationView: GeneralInformationView!
     private var firstStageInformationView: StageInformationView!
     private var secondStageInformationView: StageInformationView!
-
-    private let lookLaunchesButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 16
-        button.tintColor = UIColor(named: "textWhite")
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22.0)
-        button.backgroundColor = UIColor.init(rgb: 0x212121)
-        button.setTitle("Посмотреть запуски", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
 
     // MARK: - Initializers
 
@@ -53,6 +56,36 @@ class RocketInformationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Public methods
+
+    func setName(name: String) {
+        headerView.configure(rocketName: name)
+    }
+
+    func setGeneralInfo(firstLaunch: String, counrty: String, cost: Int) {
+        generalInformationView.setupValues(
+            firstLaunch: firstLaunch,
+            counrty: counrty,
+            cost: cost
+        )
+    }
+
+    func setFirstStageInfo(engines: Int, fuel: Int, burnTime: Int) {
+        firstStageInformationView.setupValues(
+            engines: engines,
+            fuel: fuel,
+            burnTime: burnTime
+        )
+    }
+
+    func setSecondStageInfo(engines: Int, fuel: Int, burnTime: Int) {
+        secondStageInformationView.setupValues(
+            engines: engines,
+            fuel: fuel,
+            burnTime: burnTime
+        )
+    }
+
     // MARK: - Private methods
 
     private func configureUI() {
@@ -62,40 +95,23 @@ class RocketInformationView: UIView {
         setupRocketImageViewConstraints()
 
         headerView = HeaderView()
-        headerView.configure(rocketName: "Falcon Heavy")
         scrollView.addSubview(headerView)
         setupHeaderViewConstraints()
 
         createParametersCollectionView()
 
         generalInformationView = GeneralInformationView()
-        generalInformationView.setupValues(
-            firstValue: "7 февраля, 2018",
-            secondValue: "США",
-            thirdValue: "$90 млн"
-        )
+
         scrollView.addSubview(generalInformationView)
         setupGeneralInformationViewConstraints()
 
         firstStageInformationView = StageInformationView()
         firstStageInformationView.setupHeaderText(headerText: "ПЕРВАЯ СТУПЕНЬ")
-        firstStageInformationView.setupValues(
-            firstValue: "27",
-            secondValue: "308,6",
-            secondMetric: "ton",
-            thirdValue: "593",
-            thirdMetric: "sec")
         scrollView.addSubview(firstStageInformationView)
         setupStageInformationViewConstraints(currentView: firstStageInformationView)
 
         secondStageInformationView = StageInformationView()
         secondStageInformationView.setupHeaderText(headerText: "ВТОРАЯ СТУПЕНЬ")
-        secondStageInformationView.setupValues(
-            firstValue: "27",
-            secondValue: "308,6",
-            secondMetric: "ton",
-            thirdValue: "593",
-            thirdMetric: "sec")
         scrollView.addSubview(secondStageInformationView)
         setupStageInformationViewConstraints(currentView: secondStageInformationView)
 
@@ -122,7 +138,7 @@ class RocketInformationView: UIView {
 
     private func setupScrollViewConstraints() {
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
@@ -189,24 +205,4 @@ class RocketInformationView: UIView {
             lookLaunchesButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -32)
         ])
     }
-
-    // MARK: - Lifecycle
-
-    override func layoutSubviews() {
-        parametersCollectionView?.delegate = self
-        parametersCollectionView?.dataSource = self
-    }
-
-}
-
-extension RocketInformationView: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ParametersCollectionCell.identifier, for: indexPath) as! ParametersCollectionCell
-        return cell
-    }
-
 }

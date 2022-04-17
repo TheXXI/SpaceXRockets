@@ -26,7 +26,6 @@ class ParametersCollectionCell: UICollectionViewCell {
 
     let parameterNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Диаметр, ft"
         label.font = .systemFont(ofSize: 17.0)
         label.textColor = UIColor(rgb: 0x8E8E8F)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +38,7 @@ class ParametersCollectionCell: UICollectionViewCell {
         super.init(frame: .zero)
 
         layer.cornerRadius = 32
-        backgroundColor = UIColor(rgb: 0x212121)
+        backgroundColor = UIColor(named: "cellsColor")
 
         addSubviews()
         setupConstraints()
@@ -47,6 +46,24 @@ class ParametersCollectionCell: UICollectionViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Public methods
+
+    func configure(index: Int, value: String) {
+        switch index {
+        case 0:
+            parameterNameLabel.text = "Высота, ft"
+        case 1:
+            parameterNameLabel.text = "Диаметр, ft"
+        case 2:
+            parameterNameLabel.text = "Масса, lb"
+        case 3:
+            parameterNameLabel.text = "Нагрузка, lb"
+        default:
+            break
+        }
+        parameterValueLabel.text = value
     }
 
     // MARK: - Private methods

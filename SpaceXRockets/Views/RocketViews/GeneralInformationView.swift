@@ -42,10 +42,10 @@ class GeneralInformationView: UIView {
 
     // MARK: - Public methods
 
-    func setupValues(firstValue: String, secondValue: String, thirdValue: String) {
-        lines[0].setValue(value: firstValue)
-        lines[1].setValue(value: secondValue)
-        lines[2].setValue(value: thirdValue)
+    func setupValues(firstLaunch: String, counrty: String, cost: Int) {
+        lines[0].setValue(value: firstLaunch)
+        lines[1].setValue(value: counrty)
+        lines[2].setValue(value: String(cost))
     }
 
     // MARK: - Private methods
